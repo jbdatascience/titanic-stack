@@ -54,10 +54,11 @@ def fare_category(df):
     return pd.qcut(fare_wo_na, 4, labels=range(4))
 
 
-def prep_features(df):
+def prep_features(filepath):
     ''' prep all features
     '''
-    df = (df.rename(columns=str.lower)
+    df = (pd.read_csv(filepath)
+            .rename(columns=str.lower)
             .assign(title=lambda df: df.name.apply(get_title))
             .assign(
                 fam_size=lambda df: family_size(df),
